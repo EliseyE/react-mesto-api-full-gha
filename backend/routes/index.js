@@ -7,6 +7,12 @@ const { auth } = require('../middlewares/auth');
 
 const NotFoundError = require('../errors/not-found-error');
 
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
 router.use('/signin', signinRouter);
 router.use('/signup', signupRouter);
 router.use('/users', auth, usersRouter);
