@@ -4,7 +4,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.28.31
+IP-адрес 158.160.29.243
 
 Frontend https://mesto.elisey.students.nomoredomains.monster
 
