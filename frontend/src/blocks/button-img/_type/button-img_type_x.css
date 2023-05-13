@@ -1,0 +1,8 @@
+.button-img_type_x {
+  padding: 0;
+  border: 0;
+  width: 20px;
+  height: 20px;
+  background-image: url('../../../images/button-img_type_x.svg');
+  background-size: contain;
+}

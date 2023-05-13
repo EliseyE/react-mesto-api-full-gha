@@ -1,0 +1,12 @@
+.page__edit-form {
+  width: 358px;
+  padding: 0;
+  margin-top: 60px;
+}
+
+@media screen and (max-width: 650px) {
+  .page__edit-form {
+  width: 260px;
+  margin-top: 40px;
+  }
+}

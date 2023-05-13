@@ -1,0 +1,9 @@
+.single-menu_type_logout {
+    display: flex;
+}
+
+@media screen and (max-width: 650px) {
+  .single-menu_type_logout {
+    display: none;
+  }
+}

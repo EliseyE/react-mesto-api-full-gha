@@ -1,0 +1,11 @@
+.photoCard__description {
+  margin: 0;
+  padding: 0;
+  width: 188px;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

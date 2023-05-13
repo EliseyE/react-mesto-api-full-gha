@@ -1,0 +1,13 @@
+.photoCard__like-counter {
+  padding: 0;
+  max-width: 100%;
+  margin: 3px 0 0 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  text-align: center;
+  display: block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

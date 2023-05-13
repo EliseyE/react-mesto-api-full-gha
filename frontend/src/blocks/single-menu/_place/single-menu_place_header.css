@@ -1,0 +1,15 @@
+.single-menu_place_header {
+  align-self: center;
+  justify-content: center;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  gap: 24px;
+}
+
+@media screen and (max-width: 650px) {
+  .single-menu_place_header {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

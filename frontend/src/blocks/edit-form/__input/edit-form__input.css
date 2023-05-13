@@ -1,0 +1,16 @@
+.edit-form__input {
+  color: #000;
+  padding-bottom: 9px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 650px) {
+  .edit-form__input  {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

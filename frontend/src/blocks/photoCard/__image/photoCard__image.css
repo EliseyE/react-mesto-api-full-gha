@@ -1,0 +1,12 @@
+.photoCard__image {
+  width: 282px;
+  height: 282px;
+  object-position: center;
+  object-fit: cover;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.photoCard__image:hover {
+  opacity: .9;
+}

@@ -1,0 +1,21 @@
+.single-menu_place_header-option {
+  width: 100%;
+  min-height: 142px;
+  box-sizing: border-box;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  font-size: 18px;
+  line-height: 22px;
+  font-weight: 400;
+  gap: 17px;
+  border-bottom: 1px solid #545454;
+  text-align: center;
+  display: none;
+}
+
+@media screen and (max-width: 650px) {
+  .single-menu_place_header-option {
+    display: flex;
+  }
+}

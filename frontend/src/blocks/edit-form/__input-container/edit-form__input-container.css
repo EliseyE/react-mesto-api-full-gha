@@ -1,0 +1,13 @@
+.edit-form__input-container {
+  padding: 0;
+  margin: 14px 0 19px 0;
+  border: 0 none;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 650px) {
+  .edit-form__input-container {
+    margin: 36px 0 14px 0;
+  }
+}

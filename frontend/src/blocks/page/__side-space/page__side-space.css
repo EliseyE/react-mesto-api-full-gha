@@ -1,0 +1,15 @@
+.page__side-space {
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 986px) {
+  .page__side-space {
+    padding: 0 calc(100%*(50/986));
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .page__side-space {
+    padding: 0 calc(100%*(19/320));
+  }
+}

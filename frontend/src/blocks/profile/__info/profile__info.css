@@ -1,0 +1,27 @@
+.profile__info {
+  font-family: 'Inter', Arial, sans-serif;
+  color: #fff;
+  display: grid;
+  grid-template-rows: repeat(2, min-content);
+  grid-template-columns: minmax(294px, max-content) min-content;
+  column-gap: 18px;
+  row-gap: 12px;
+  align-self: center;
+  padding: 0 30px;
+}
+
+@media screen and (max-width: 760px) {
+  .profile__info  {
+    padding: 26px 0 31px 42px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+  .profile__info  {
+    grid-template-columns: minmax(189px, max-content) min-content;
+    column-gap: 10px;
+    row-gap: 8.5px;
+    padding-right: calc(100%*(19/282));
+    padding-left: calc(100%*(46/282));
+  }
+}

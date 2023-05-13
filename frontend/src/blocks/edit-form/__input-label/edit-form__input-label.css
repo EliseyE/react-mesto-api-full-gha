@@ -1,0 +1,5 @@
+.edit-form__input-label {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}

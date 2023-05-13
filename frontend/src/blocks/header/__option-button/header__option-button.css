@@ -1,0 +1,9 @@
+.header__option-button {
+  display: none;
+}
+
+@media screen and (max-width: 650px) {
+  .header__option-button {
+    display: block;
+  }
+}

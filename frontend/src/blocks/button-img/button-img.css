@@ -1,0 +1,14 @@
+.button-img {
+  padding: 0;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: opacity .35s;
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fff;
+}
+
+.button-img:hover {
+  opacity: .6;
+}
+ 

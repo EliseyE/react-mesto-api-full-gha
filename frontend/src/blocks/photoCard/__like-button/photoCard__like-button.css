@@ -1,0 +1,15 @@
+.photoCard__like-button {
+  width: 22px;
+  height: 19px;
+  border: 0;
+  background-color: rgba(0, 0, 0, 0);
+  background-image: url('../../../images/element__like-button.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity .35s;
+  cursor: pointer;
+}
+
+.photoCard__like-button:hover {
+  opacity: .5;
+}

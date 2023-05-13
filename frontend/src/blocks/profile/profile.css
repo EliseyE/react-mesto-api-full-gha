@@ -1,0 +1,13 @@
+.profile {
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content auto min-content;
+}
+
+@media screen and (max-width: 760px) {
+  .profile {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    grid-template-rows: repeat(3, min-content);
+  }
+}
