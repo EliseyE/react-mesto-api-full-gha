@@ -4,6 +4,7 @@ const cardsRouter = require('./cards');
 const signinRouter = require('./signin');
 const signupRouter = require('./signup');
 const { auth } = require('../middlewares/auth');
+const { cors } = require('../middlewares/cors');
 
 const NotFoundError = require('../errors/not-found-error');
 
@@ -12,6 +13,8 @@ router.get('/crash-test', () => {
     throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
+
+router.use(cors);
 
 router.use('/signin', signinRouter);
 router.use('/signup', signupRouter);
