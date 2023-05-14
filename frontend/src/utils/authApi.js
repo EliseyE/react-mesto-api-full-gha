@@ -1,4 +1,4 @@
-import { BASE_URL } from "./constants";
+import { API_BASE_URL } from "./constants";
 
 async function responceProcessing(res) {
   const resData = await res.json();
@@ -27,7 +27,7 @@ async function makeRequset(url, method, data, token) {
     config.body = JSON.stringify(data);
 
   try {
-    const res = await fetch(`${BASE_URL}${url}`, config);
+    const res = await fetch(`${API_BASE_URL}${url}`, config);
     const resData = responceProcessing(res);
     return resData;
   } catch (err) {
