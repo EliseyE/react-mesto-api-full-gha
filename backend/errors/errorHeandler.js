@@ -20,7 +20,8 @@ function errorHeandler(err) {
     }
     case 'MongoServerError': {
       if (err.code === 11000) {
-        return new ConflictError(err.message);
+        const exitingItems = Object.values(err.keyValue).map((error) => error).join('; ');
+        return new ConflictError(`Sorry, the '${exitingItems}' is almost exist`);
       }
       return err;
     }

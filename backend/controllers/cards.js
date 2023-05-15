@@ -5,7 +5,7 @@ const ForbiddenError = require('../errors/forbidden-error');
 module.exports.getCards = (req, res, next) => {
   Card.find({})
     .populate(['owner', 'likes'])
-    .then((cards) => res.json({ cards }))
+    .then((cards) => res.json(cards.reverse()))
     .catch((err) => { next(errorHeandler(err)); });
 };
 
@@ -14,7 +14,8 @@ module.exports.createCard = (req, res, next) => {
   const owner = req.user._id;
 
   Card.create({ name, link, owner })
-    .then((card) => res.status(201).json({ card }))
+    .then((card) => Card.findById(card._id).populate(['owner']))
+    .then((card) => res.status(201).json(card))
     .catch((err) => { next(errorHeandler(err)); });
 };
 
@@ -42,7 +43,7 @@ module.exports.likeCard = (req, res, next) => Card.findByIdAndUpdate(
 )
   .populate(['owner', 'likes'])
   .orFail()
-  .then((card) => res.json({ card }))
+  .then((card) => res.json(card))
   .catch((err) => { next(errorHeandler(err)); });
 
 module.exports.dislikeCard = (req, res, next) => Card.findByIdAndUpdate(
@@ -52,5 +53,5 @@ module.exports.dislikeCard = (req, res, next) => Card.findByIdAndUpdate(
 )
   .populate(['owner', 'likes'])
   .orFail()
-  .then((card) => res.json({ card }))
+  .then((card) => res.json(card))
   .catch((err) => { next(errorHeandler(err)); });

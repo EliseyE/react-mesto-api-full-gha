@@ -20,8 +20,8 @@ import Register from './Register';
 import * as authApi from "../utils/authApi";
 import Spinner from './Spinner';
 
-import registerIsOk from '../images/infoTooltipPopup__image-ok.svg';
-import registerIsFail from '../images/infoTooltipPopup__image-fail.svg';
+import imageSuccess from '../images/infoTooltipPopup__image-ok.svg';
+import imageFail from '../images/infoTooltipPopup__image-fail.svg';
 
 
 
@@ -42,7 +42,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({isOpen: false, card: {}});
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
   const [lastResponseStatus, setLastResponseStatus] = useState({resStatus: false, resStatusCode: 'blank', resText: 'Нет данных результата ответа сервера'});
-  const [InfoTooltipPopupImage, setInfoTooltipPopupImage] = useState('');
+  const [infoTooltipPopupImage, setInfoTooltipPopupImage] = useState('');
 
   const navigate = useNavigate();
 
@@ -66,18 +66,13 @@ function App() {
     setIsPopupOpen(true);
   };
 
-  function handleInfoTooltipPopupImage() {
-    setInfoTooltipPopupImage(lastResponseStatus.resStatus  ? registerIsOk : registerIsFail)
+  function handleinfoTooltipPopupImage() {
+    setInfoTooltipPopupImage(lastResponseStatus.resStatus ? imageSuccess : imageFail)
   }
 
   function handleInfoTooltipPopupOpen() {
-    console.log(lastResponseStatus);
-
-    handleInfoTooltipPopupImage();
-    console.log(InfoTooltipPopupImage);
+    handleinfoTooltipPopupImage();
     setIsInfoTooltipPopupOpen(true);
-    console.log(InfoTooltipPopupImage);
-
     setIsPopupOpen(true);
   };
 
@@ -88,7 +83,9 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setSelectedCard({...selectedCard, isOpen: false});
     setIsConfirmDeletingCardPopupOpen({...isConfirmDeletingCardPopupOpen, isOpen: false, card: {}});
+
     setIsInfoTooltipPopupOpen(false);
+    setLastResponseStatus({...lastResponseStatus, resStatusCode: 'blank' });
   };
 
   function handleCardClick(card) {
@@ -162,34 +159,39 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  useEffect(() => {
+    if(lastResponseStatus.resStatusCode !== 'blank')
+      handleInfoTooltipPopupOpen();
+  }, [lastResponseStatus]);
+
 // API AUTH
 
   // REGISTER
   const handleRegister = useCallback( async (regData) => {
     try {
       const res = await authApi.register(regData);
-      setLastResponseStatus({...lastResponseStatus, resStatus: res.resValues.ok, resStatusCode: res.resValues.status, resText: 'Вы успешно зарегистрировались!'});
-      setInfoTooltipPopupImage(lastResponseStatus.resStatus  ? registerIsOk : registerIsFail)
+      setLastResponseStatus({...lastResponseStatus, resStatus: res.resValues.ok, resStatusCode: res.resValues.status, resText: 'You are successful registered!'});
+      setInfoTooltipPopupImage(lastResponseStatus.resStatus  ? imageSuccess : imageFail)
       navigate('/sign-in', { replace: true });
     } catch (err) {
-      setLastResponseStatus({...lastResponseStatus, resStatus: err.resValues.ok, resStatusCode: err.resValues.status, resText: err.resData.error});
-      setInfoTooltipPopupImage(lastResponseStatus.resStatus  ? registerIsOk : registerIsFail)
-    } finally {
-      setTimeout(() => {
-        handleInfoTooltipPopupOpen();
-      }, 300);
+      setLastResponseStatus({...lastResponseStatus, resStatus: err.resValues.ok, resStatusCode: err.resValues.status, resText: err.resData.message});
+      setInfoTooltipPopupImage(lastResponseStatus.resStatus  ? imageSuccess : imageFail)
     }
   }, [lastResponseStatus]);
 
-  //CHECH TOKEN
+  // CHECK TOKEN
   const tokenCheck = useCallback( async () => {
     try {
-      const JWT = localStorage.getItem('JWT');
-      if(!JWT)
+      // opened token
+      // const JWT = localStorage.getItem('JWT');
+      // if(!JWT)
+
+      // cookie token
+      const jwtCheckRes = await authApi.checkTokenAPI();
+      if(!jwtCheckRes.resData._id)
         throw new Error('JWT is empty');
-      const res = await authApi.getContent(JWT);
+      const res = await authApi.getContent();
       if(res) {
-        setUserEmail(res.resData.data.email);
         setIsLoggedIn(true);
       }
     } catch (err) {
@@ -203,9 +205,18 @@ function App() {
     tokenCheck();
   }, []);
 
+  // opened token
   // AUTHORIZE
-  const handleAuthorize = useCallback( async (token) => {
-    localStorage.setItem('JWT', token);
+  // const handleAuthorize = useCallback( async (token) => {
+  //   localStorage.setItem('JWT', token);
+  //   setIsLoggedIn(true);
+  //   navigate('/', {replace: true});
+  //   tokenCheck();
+  // }, [tokenCheck]);
+
+  // cookie token
+   // AUTHORIZE
+   const handleAuthorize = useCallback( async () => {
     setIsLoggedIn(true);
     navigate('/', {replace: true});
     tokenCheck();
@@ -216,14 +227,14 @@ function App() {
     setLoading(true);
     try {
       const res = await authApi.authorize(loginData);
-      if(res.resData.token) {
-        handleAuthorize(res.resData.token);
+      if(res.resData) {
+        // opened token
+        // handleAuthorize(res.resData);
+        handleAuthorize();
       }
     } catch (err) {
       setLastResponseStatus({...lastResponseStatus, resStatus: err.resValues.ok, resStatusCode: err.resValues.status, resText: err.resData.message});
-      setTimeout(() => {
-        handleInfoTooltipPopupOpen();
-      }, 300);
+      setInfoTooltipPopupImage(lastResponseStatus.resStatus  ? imageSuccess : imageFail)
       } finally {
         setLoading(false);
       }
@@ -244,9 +255,18 @@ function App() {
 
   }, [isLoggedIn, currentUser]);
 
+  // LOGOUT
+  // opened token
+  // function LogOut() {
+  //   setIsLoggedIn(false);
+  //   localStorage.removeItem('JWT');
+  // };
+
+  // LOGOUT
+  // cookie token
   function LogOut() {
+    authApi.logout();
     setIsLoggedIn(false);
-    localStorage.removeItem('JWT');
   };
 
   // LOADING SPINNER
@@ -328,7 +348,7 @@ function App() {
             isOpen={isInfoTooltipPopupOpen}
             onClose={closeAllPopups}
             res={lastResponseStatus}
-            image={InfoTooltipPopupImage}
+            image={infoTooltipPopupImage}
           />
         </LastResponseStatusContext.Provider>
       </IsLoadingContext.Provider>

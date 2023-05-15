@@ -1,4 +1,4 @@
-const JWT_SECRET = '2e20f39cca553a8aaf75712301ad9e78823c3377a98cd26e539e4fe5feda5dad';
+const { JWT_SECRET } = process.env;
 const {
   JOI_PRESETS,
 } = require('./utils/joi-preset-validation-rules');

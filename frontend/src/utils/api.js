@@ -11,6 +11,7 @@ class Api {
 
   _downloadData(path) {
     return fetch(`${this._baseUrl}${path.path}`, {
+      credentials: 'include',
       headers: { authorization: this._headers.authorization }
     })
     .then(res => {return this._responceProcessing(res)})
@@ -19,6 +20,7 @@ class Api {
   _uploadData(path, data, method) {
     return fetch(`${this._baseUrl}${path.path}`, {
       method: method,
+      credentials: 'include',
       headers: {
         authorization: this._headers.authorization,
         'Content-Type': 'application/json'

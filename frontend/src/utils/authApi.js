@@ -20,6 +20,7 @@ async function makeRequset(url, method, data, token) {
 
   const config = {
     method,
+    credentials: 'include',
     headers
   };
 
@@ -33,7 +34,6 @@ async function makeRequset(url, method, data, token) {
   } catch (err) {
     return err;
   }
-
 };
 
 export const register = (data) => {
@@ -44,6 +44,20 @@ export const authorize = (data) => {
   return makeRequset('/signin', 'POST', data, undefined);
 };
 
-export const getContent = (token) => {
-  return makeRequset('/users/me', 'GET', undefined, token);
+export const logout = () => {
+  return makeRequset('/logout', 'POST', undefined, undefined);
+};
+
+// opened token
+// export const getContent = (token) => {
+//   return makeRequset('/users/me', 'GET', undefined, token);
+// };
+
+// cookie token
+export const getContent = () => {
+  return makeRequset('/users/me', 'GET', undefined, undefined);
+};
+
+export const checkTokenAPI = () => {
+  return makeRequset('/jwtcheck', 'POST', undefined, undefined);
 };

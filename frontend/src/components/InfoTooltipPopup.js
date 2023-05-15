@@ -8,7 +8,7 @@ function InfoTooltipPopup({isOpen, onClose, res, image}) {
       <div className="infoTooltip">
         <img
           src={image}
-          alt=""
+          alt="Информационный знак"
           className="infoTooltip__image infoTooltip__image_size_normal"
         />
         <h1 className="infoTooltip__message">
