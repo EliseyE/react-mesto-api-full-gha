@@ -7,7 +7,7 @@ import SingleMenuRegister from "./SingleMenuRegister";
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
 
-function Header({ onLogOut, isLoggedIn, userEmail }) {
+function Header({ onLogOut, isLoggedIn }) {
 
   const [isHeaderOptionOn, setIsHeaderOptionOn] = useState(false);
 

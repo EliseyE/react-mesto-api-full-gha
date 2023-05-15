@@ -30,7 +30,6 @@ function App() {
   const [loading, setLoading] = useState(true);
 
   const [currentUser, setCurrentUser] = useState({name: '', about: '', avatar: '', _id: '', cohort: ''});
-  const [userEmail, setUserEmail] = useState('');
   const [cards, setCards] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -278,7 +277,7 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <IsLoadingContext.Provider value={isLoading}>
         <LastResponseStatusContext.Provider value={lastResponseStatus.resStatus}>
-          <Header onLogOut={LogOut} isLoggedIn={isLoggedIn} userEmail={userEmail}/>
+          <Header onLogOut={LogOut} isLoggedIn={isLoggedIn} />
           <Routes>
             <Route
               path='/sign-up'
