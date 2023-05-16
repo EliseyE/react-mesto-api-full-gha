@@ -39,11 +39,15 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isConfirmDeletingCardPopupOpen, setIsConfirmDeletingCardPopupOpen] = useState({isOpen: false, card: {}});
   const [selectedCard, setSelectedCard] = useState({isOpen: false, card: {}});
+
   const [isInfoTooltipPopupOpen, setIsInfoTooltipPopupOpen] = useState(false);
-  const [lastResponseStatus, setLastResponseStatus] = useState({resStatus: false, resStatusCode: 'blank', resText: 'Нет данных результата ответа сервера'});
   const [infoTooltipPopupImage, setInfoTooltipPopupImage] = useState('');
 
+  const [lastResponseStatus, setLastResponseStatus] = useState({resStatus: false, resStatusCode: 'blank', resText: 'Нет данных результата ответа сервера'});
+
   const navigate = useNavigate();
+
+// UI FUNCTIONS
 
   function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
@@ -112,6 +116,7 @@ function App() {
       .finally(() => setIsLoading(false));
   };
 
+  // CLICK ESC TO CLOSE POPUP
   useEffect(() => {
     function handleEscapeKey(event) {
       if (event.code === 'Escape') {
@@ -124,6 +129,8 @@ function App() {
       document.addEventListener('keydown', handleEscapeKey);
     return () => document.removeEventListener('keydown', handleEscapeKey);
   }, [isPopupOpen]);
+
+// REQUESTS TO API
 
   function handleUpdateUser(userInfo) {
     setIsLoading(true);
@@ -181,11 +188,6 @@ function App() {
   // CHECK TOKEN
   const tokenCheck = useCallback( async () => {
     try {
-      // opened token
-      // const JWT = localStorage.getItem('JWT');
-      // if(!JWT)
-
-      // cookie token
       const jwtCheckRes = await authApi.checkTokenAPI();
       if(!jwtCheckRes.resData._id)
         throw new Error('JWT is empty');
@@ -204,16 +206,6 @@ function App() {
     tokenCheck();
   }, []);
 
-  // opened token
-  // AUTHORIZE
-  // const handleAuthorize = useCallback( async (token) => {
-  //   localStorage.setItem('JWT', token);
-  //   setIsLoggedIn(true);
-  //   navigate('/', {replace: true});
-  //   tokenCheck();
-  // }, [tokenCheck]);
-
-  // cookie token
    // AUTHORIZE
    const handleAuthorize = useCallback( async () => {
     setIsLoggedIn(true);
@@ -227,8 +219,6 @@ function App() {
     try {
       const res = await authApi.authorize(loginData);
       if(res.resData) {
-        // opened token
-        // handleAuthorize(res.resData);
         handleAuthorize();
       }
     } catch (err) {
@@ -255,14 +245,6 @@ function App() {
   }, [isLoggedIn, currentUser]);
 
   // LOGOUT
-  // opened token
-  // function LogOut() {
-  //   setIsLoggedIn(false);
-  //   localStorage.removeItem('JWT');
-  // };
-
-  // LOGOUT
-  // cookie token
   function LogOut() {
     authApi.logout();
     setIsLoggedIn(false);

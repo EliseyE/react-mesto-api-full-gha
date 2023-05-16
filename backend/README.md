@@ -1,4 +1,6 @@
 [![Tests](../../actions/workflows/tests-13-sprint.yml/badge.svg)](../../actions/workflows/tests-13-sprint.yml) [![Tests](../../actions/workflows/tests-14-sprint.yml/badge.svg)](../../actions/workflows/tests-14-sprint.yml)
+
+![Проект: Mesto Russia (NodeJS)](./readme-backend.png)
 # Проект Mesto фронтенд + бэкенд
 
 [Репозиторий проектной работы 14](https://github.com/EliseyE/express-mesto-gha/ "Репозиторий проектной работы 14")
@@ -14,7 +16,7 @@
 ## Запуск проекта
 
 `npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+`npm run dev` — запускает dev-сервер с hot-reload
 
 ## О проекте
 Данный проект - это серверная часть приложения Mesto. Сервер необходим для обработки запросов со стороны клиентской части приложения, например, той, что была разработана в предыдущих модулях обучения.
