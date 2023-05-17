@@ -8,7 +8,7 @@ const userId = Joi.string().hex().required().length(24);
 const name = Joi.string().min(2).max(30);
 const about = Joi.string().min(2).max(30);
 const link = Joi.string().pattern(URL_REG_EXP);
-const cardId = Joi.string().alphanum().length(24);
+const cardId = Joi.string().hex().required().length(24);
 const email = Joi.string().required().email();
 const password = Joi.string().required().min(4).max(30);
 
